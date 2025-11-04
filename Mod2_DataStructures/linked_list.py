@@ -1,6 +1,8 @@
-def create_ll_node(data):
-    return {'data': data,
-            'next': None}
+def create_ll_node(payload):
+    return {
+        'data': payload,
+        'next': None
+    }
 
 
 def create_ll():
@@ -13,12 +15,29 @@ def insert(ll, ll_node):
         return
     node = ll['head']
     while node['next'] is not None:
-        # print_node(node)
         node = node['next']
     node['next'] = ll_node
 
-    #     if node['next'] is None: ## It's the last node in the list
-    #     node['next'] = ll_node
+def insert_head(ll, ll_node):
+    ll_node['next'] = ll['head']
+    ll['head'] = ll_node
+
+def delete(ll, node_data):
+    if ll['head'] is None:
+        return
+    cur_node = ll['head']
+    if cur_node['data'] == node_data:
+        ll['head'] = cur_node['next']
+    while cur_node['next']['data'] != node_data:
+        cur_node = cur_node['next']
+        if cur_node['next'] is None:
+            return ## Couldn't find the data
+    node_to_delete = cur_node['next']
+    cur_node['next'] = node_to_delete['next']
+    return node_to_delete
+
+
+
 
 
 def print_node(ll_node):
@@ -45,6 +64,19 @@ insert(my_list, six_clubs)
 two_spades = create_ll_node('Two Spades')
 insert(my_list, two_spades)
 
+four_hearts = create_ll_node('Four Hearts')
+insert(my_list, four_hearts)
+
+nine_clubs = create_ll_node('Nine Clubs')
+insert(my_list, nine_clubs)
+
 # print_node(six_clubs)
+
+print_list(my_list)
+
+delete(my_list, 'Four Hearts')
+delete(my_list, 'Four Hearts')
+delete(my_list, 'Ace of Spades')
+# delete(my_list, 'Nine Clubs')
 
 print_list(my_list)
