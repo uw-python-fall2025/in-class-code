@@ -18,6 +18,17 @@ def traverse(tree):
     traverse(tree.left)
     traverse(tree.right)
 
+def traverse_depth(tree, level = 0):
+    if tree is None:
+        return
+    for i in range(1, level + 1):
+        print('-', end='')
+    print(tree)
+    traverse_depth(tree.left, level + 1)
+    traverse_depth(tree.right, level + 1)
+
+
+
 
 def insert(root, data):
     if not root:
@@ -53,7 +64,7 @@ tree = insert(tree, 17)
 tree = insert(tree, 38)
 tree = insert(tree, 100)
 
-traverse(tree)
+traverse_depth(tree)
 
 search(tree, 38)
 
@@ -74,4 +85,4 @@ search(tree2, 38)
 
 
 
-traverse(tree2)
+traverse_depth(tree2)
